@@ -3,6 +3,9 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+
+//           "Self-discipline is a muscle. Train it daily to achieve your goals and dreams.",
+
 function App() {
   const [info, setInfo] = useState([]);
 
