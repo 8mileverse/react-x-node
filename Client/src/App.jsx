@@ -22,15 +22,15 @@ function App() {
           Backend and Frontend Connection [react + (Node.js + Express)]
         </h1>
 
-        <ul className="rounded-2xl p-4 bg-orange-200 space-y-7 shadow-lg ">
+        <ul className="rounded-2xl p-4  space-y-7 shadow-lg ">
           {info.map((item, index) => {
             return (
               <li
                 key={index}
-                className="bg-white text-black p-4 rounded-lg transition-transform transform hover:scale-105"
+                className="bg-white text-black p-6 rounded-lg li transition-transform transform hover:scale-105"
               >
-                <p className="text-xl font-semibold">{item.title}</p>
-                <p className="text-sm font-light">{item.content}</p>
+                <p className="text-xl text-grey-800 font-semibold">{item.title}</p>
+                <p className="text-sm text-grey-600 font-light">{item.content}</p>
               </li>
             );
           })}
