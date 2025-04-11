@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 corsOptions = {
-  origin: frontendUrl, // Replace with your frontend URL
+  origin: 'http://localhost:5173', // Replace with your frontend URL
   methods: ['GET', 'POST'], 
 };
 
