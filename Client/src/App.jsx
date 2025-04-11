@@ -10,8 +10,13 @@ function App() {
   const [info, setInfo] = useState([]);
 
   const fetchData = async () => {
-    const response = await axios.get("http://localhost:4100");
-    setInfo(response.data.blogPost);
+    try {
+      const res = await axios.get("https://react-x-node.onrender.com");
+      setInfo(res.data.blogPost);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+      // Optionally, set a state to handle error and display a message to the user
+    }
   };
 
   useEffect(() => {
@@ -32,8 +37,8 @@ function App() {
                 key={index}
                 className="bg-white text-black p-6 rounded-lg li transition-transform transform hover:scale-105"
               >
-                <p className="text-xl text-grey-800 font-semibold">{item.title}</p>
-                <p className="text-sm text-grey-600 font-light">{item.content}</p>
+                <p className="text-xl text-gray-800 font-semibold">{item.title}</p>
+                <p className="text-sm text-gray-600 font-light">{item.content}</p>
               </li>
             );
           })}
