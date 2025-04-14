@@ -3,11 +3,14 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-
 //           "Self-discipline is a muscle. Train it daily to achieve your goals and dreams.",
 
 function App() {
+  // calling States for Functions
   const [info, setInfo] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [showTitle, setShowTitle] = useState("");
+  const [showContent, setShowContent] = useState("");
 
   const fetchData = async () => {
     try {
@@ -23,6 +26,25 @@ function App() {
     fetchData();
   }, []);
 
+  const handleAddPost = async () => {
+    try {
+      const res = await axios.post("http://localhost:4100/data", {
+        title: showTitle,
+        content: showContent,
+      });
+      // Update the state with the new post data
+
+      setInfo([...info, res.data.blogPost]);
+
+      // Clear form fields after adding the post
+      setShowTitle("");
+      setShowContent("");
+      setShowForm(false); // Close the form after submission
+    } catch (error) {
+      console.log(`${error} error`);
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen w-full flex justify-center items-center gap-10 flex-col bg-grey-100 text-white">
@@ -30,15 +52,53 @@ function App() {
           Backend and Frontend Connection [react + (Node.js + Express)]
         </h1>
 
-        <ul className="rounded-2xl p-4  space-y-7 shadow-lg flex flex-col gap-0">
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className="text-white bg-amber-500 rounded-full p-2"
+        >
+          + Add Post
+        </button>
+
+        {showForm && (
+          <div className="p-8 py-6 rounded-2xl shadow-2xl h-100 space-y-8 w-100">
+            <input
+              type="text"
+              placeholder="Enter title"
+              value={showTitle}
+              onChange={(e) => setShowTitle(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg text-white  placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400"
+            />
+
+            <textarea
+              placeholder="Enter An Idea"
+              value={showContent}
+              onChange={(e) => setShowContent(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg text-white placeholder-gray-00 focus:outline-none focus:ring-2 focus:ring-amber-400"
+              rows="5"
+            />
+
+            <button
+              onClick={handleAddPost}
+              className="w-full py-3 px-4 bg-amber-500 hover:bg-amber-600 hover:border handlePostBtn hover:border-amber-400 focus:outline-none transition-colors duration-300 text-white font-semibold rounded-lg"
+            >
+              Submit
+            </button>
+          </div>
+        )}
+
+        <ul className="rounded-2xl p-4 shadow-lg flex flex-col lg:flex-row lg:flex-wrap gap-7">
           {info.map((item, index) => {
             return (
               <li
                 key={index}
-                className="bg-white text-black p-6 rounded-lg li transition-transform transform hover:scale-105 hover:bg-amber-100 hover:ease-in-out duration-500"
+                className="bg-white text-black p-6 rounded-lg transition-transform transform hover:scale-105 hover:bg-amber-100 hover:ease-in-out duration-500 w-full lg:w-[30%]"
               >
-                <p className="text-xl text-gray-800 font-semibold">{item.title}</p>
-                <p className="text-sm text-gray-600 font-light">{item.content}</p>
+                <p className="text-xl text-gray-800 font-semibold">
+                  {item.title}
+                </p>
+                <p className="text-sm text-gray-600 font-light">
+                  {item.content}
+                </p>
               </li>
             );
           })}
