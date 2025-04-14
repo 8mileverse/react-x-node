@@ -16,4 +16,4 @@ var BlogPostSchema = new mongoose.Schema({
     "default": Date.now
   }
 });
-module.exports = mongoose.model('BlogPost', BlogPostSchema, "blogPosts");
+module.exports = mongoose.model('BlogPost', BlogPostSchema, "blogPost");

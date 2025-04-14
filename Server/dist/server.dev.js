@@ -29,7 +29,8 @@ corsOptions = {
   origin: "http://localhost:5173",
   // Replace with your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE"]
-}; // Middleware to use Mongoose
+};
+app.use(cors(corsOptions)); // Middleware to use Mongoose
 
 var mongoose = require("mongoose");
 
@@ -79,8 +80,8 @@ app.get("/", function _callee(req, res) {
       }
     }
   }, null, null, [[0, 8]]);
-});
-app.use(cors(corsOptions)); // app.get("/", (req, res, next) => {
+}); // For the Json File
+// app.get("/", (req, res, next) => {
 //   const dataPath = path.join(__dirname, "blogPost.json");
 //   fs.readFile(dataPath, "utf-8", (err, data) => {
 //     if (err) {
@@ -126,7 +127,7 @@ app.get("/", function _callee2(req, res) {
 
 var postRoutes = require('./routes/blogPosts');
 
-app.use('/api/posts', postRoutes); // Middleware
+app.use('/api', postRoutes); // Middleware
 
 app.listen(port, function () {
   console.log("Server is running on port ".concat(port));

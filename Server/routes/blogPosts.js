@@ -13,7 +13,7 @@ router.get("/", getAllPosts);
 router.get('/posts/:id', getPostById);  // Corrected path
 
 // Create New Post
-router.post("/posts", createNewPost);
+router.post("/upload", createNewPost);
 
 // Update Existing Post
 router.put('/posts/:id', updateExistingPost);  // Corrected path

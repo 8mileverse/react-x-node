@@ -12,7 +12,7 @@ const BlogPostSchema = new mongoose.Schema({
     date:{
         type: Date,
         default: Date.now
-    }
+    },
 });
 
-module.exports = mongoose.model('BlogPost', BlogPostSchema, "blogPosts");
+module.exports = mongoose.model('BlogPost', BlogPostSchema, "blogPost");

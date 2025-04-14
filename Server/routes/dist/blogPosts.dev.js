@@ -22,7 +22,7 @@ router.get("/", getAllPosts); // Get a specific blog post by ID
 router.get('/posts/:id', getPostById); // Corrected path
 // Create New Post
 
-router.post("/posts", createNewPost); // Update Existing Post
+router.post("/upload", createNewPost); // Update Existing Post
 
 router.put('/posts/:id', updateExistingPost); // Corrected path
 // Delete All Posts

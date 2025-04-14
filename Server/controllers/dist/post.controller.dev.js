@@ -63,7 +63,7 @@ exports.getPostById = function _callee2(req, res) {
         case 6:
           res.json({
             success: true,
-            data: post
+            data: blogPosts
           });
           _context2.next = 12;
           break;
@@ -93,8 +93,8 @@ exports.createNewPost = function _callee3(req, res) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
+          _context3.prev = 0;
           _req$body = req.body, title = _req$body.title, content = _req$body.content;
-          _context3.prev = 1;
           newPost = new blogPost({
             title: title,
             content: content
@@ -103,14 +103,18 @@ exports.createNewPost = function _callee3(req, res) {
           return regeneratorRuntime.awrap(newPost.save());
 
         case 5:
-          res.status(201).json(newPost);
+          res.status(201).json({
+            success: true,
+            data: newPost
+          });
           _context3.next = 11;
           break;
 
         case 8:
           _context3.prev = 8;
-          _context3.t0 = _context3["catch"](1);
-          res.status(400).json({
+          _context3.t0 = _context3["catch"](0);
+          res.status(500).json({
+            success: false,
             message: _context3.t0.message
           });
 
@@ -119,7 +123,7 @@ exports.createNewPost = function _callee3(req, res) {
           return _context3.stop();
       }
     }
-  }, null, null, [[1, 8]]);
+  }, null, null, [[0, 8]]);
 }; // @desc    POST a new post
 // @route   POST /api/posts
 

@@ -24,6 +24,8 @@ corsOptions = {
   origin: "http://localhost:5173", // Replace with your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE"],
 };
+app.use(cors(corsOptions));
+
 
 // Middleware to use Mongoose
 const mongoose = require("mongoose");
@@ -49,8 +51,9 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   });
   
 
-app.use(cors(corsOptions));
 
+
+// For the Json File
 // app.get("/", (req, res, next) => {
 //   const dataPath = path.join(__dirname, "blogPost.json");
 //   fs.readFile(dataPath, "utf-8", (err, data) => {
@@ -74,7 +77,7 @@ app.get("/", async (req, res) => {
 
 // Importing Routes
 const postRoutes = require('./routes/blogPosts');
-app.use('/api/posts', postRoutes);
+app.use('/api', postRoutes);
 
 // Middleware
 app.listen(port, () => {

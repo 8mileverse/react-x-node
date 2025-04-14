@@ -25,7 +25,7 @@ exports.getPostById = async (req, res) => {
     }
     res.json({
       success: true,
-      data: post,
+      data: blogPosts,
     });
   } catch (error) {
     res.status(500).json({
@@ -38,13 +38,20 @@ exports.getPostById = async (req, res) => {
 // @route   GET /api/posts/:id
 
 exports.createNewPost = async (req, res) => {
-  const { title, content } = req.body;
   try {
+    const { title, content } = req.body;
     const newPost = new blogPost({ title, content });
     await newPost.save();
-    res.status(201).json(newPost);
+
+    res.status(201).json({
+      success: true,
+      data: newPost,
+    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 

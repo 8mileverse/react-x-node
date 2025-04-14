@@ -15,7 +15,7 @@ function App() {
   const fetchData = async () => {
     try {
       const res = await axios.get("http://localhost:4100/data");
-      setInfo(res.data.blogPost);
+      setInfo(res.blogPost);
     } catch (error) {
       console.error("Error fetching data: ", error);
       // Optionally, set a state to handle error and display a message to the user
@@ -28,13 +28,13 @@ function App() {
 
   const handleAddPost = async () => {
     try {
-      const res = await axios.post("http://localhost:4100/data", {
+      const res = await axios.post("http://localhost:4100", {
         title: showTitle,
         content: showContent,
       });
       // Update the state with the new post data
 
-      setInfo([...info, res.data.blogPost]);
+      setInfo([...info, res.blogPost]);
 
       // Clear form fields after adding the post
       setShowTitle("");
@@ -60,7 +60,7 @@ function App() {
         </button>
 
         {showForm && (
-          <div className="p-8 py-6 rounded-2xl shadow-2xl h-100 space-y-8 w-100">
+          <div className="p-8 py-6 rounded-2xl shadow-2xl h-auto space-y-8 w-100">
             <input
               type="text"
               placeholder="Enter title"
@@ -79,7 +79,7 @@ function App() {
 
             <button
               onClick={handleAddPost}
-              className="w-full py-3 px-4 bg-amber-500 hover:bg-amber-600 hover:border handlePostBtn hover:border-amber-400 focus:outline-none transition-colors duration-300 text-white font-semibold rounded-lg"
+              className="w-full px-4 bg-amber-500 hover:bg-amber-600 hover:border handlePostBtn hover:border-amber-400 focus:outline-none transition-colors duration-300 text-white font-semibold rounded-lg"
             >
               Submit
             </button>
