@@ -30,12 +30,12 @@ function App() {
           Backend and Frontend Connection [react + (Node.js + Express)]
         </h1>
 
-        <ul className="rounded-2xl p-4  space-y-7 shadow-lg ">
+        <ul className="rounded-2xl p-4  space-y-7 shadow-lg flex flex-col gap-0">
           {info.map((item, index) => {
             return (
               <li
                 key={index}
-                className="bg-white text-black p-6 rounded-lg li transition-transform transform hover:scale-105"
+                className="bg-white text-black p-6 rounded-lg li transition-transform transform hover:scale-105 hover:bg-amber-100 hover:ease-in-out duration-500"
               >
                 <p className="text-xl text-gray-800 font-semibold">{item.title}</p>
                 <p className="text-sm text-gray-600 font-light">{item.content}</p>
