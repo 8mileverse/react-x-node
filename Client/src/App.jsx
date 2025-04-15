@@ -35,7 +35,7 @@ function App() {
 
   const handleAddPost = async () => {
     try {
-        const res = await axios.post(`${baseUrl}/upload`, {
+        const res = await axios.post(`${baseUrl}/api/upload`, {
         title: showTitle,
         content: showContent,
       });
