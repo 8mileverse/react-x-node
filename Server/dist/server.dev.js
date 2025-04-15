@@ -14,7 +14,7 @@ app.use(express.json());
 var blogPost = require("./models/BlogPost");
 
 var port = process.env.PORT || 4100;
-var frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173"; // Default to localhost if not set
+var frontendUrl = process.env.FRONTEND_URL || process.env.VERCEL_URL || "http://localhost:5173"; // Default to localhost if not set
 // const reactAppUrl = process.env.REACT_APP_API_URL || 'http://localhost:5173'; // Default to localhost if not set
 
 var bodyParser = require("body-parser");
