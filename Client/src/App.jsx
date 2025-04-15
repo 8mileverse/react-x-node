@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 
 // Use the API URL from .env or default to localhost for local dev
-const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:4100/api"; // Use prod URL or fallback to localhost
+const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:4100"; // Use prod URL or fallback to localhost
 
 
 //           "Self-discipline is a muscle. Train it daily to achieve your goals and dreams.",
