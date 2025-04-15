@@ -65,15 +65,15 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 // });
 
 
-app.get("/", async (req, res) => {
-  try {
-    const posts = await blogPost.find(); // Fetch all blog posts from MongoDB
-    res.json(posts); // Return the data as JSON
-  } catch (err) {
-    console.error("Error fetching posts:", err);
-    res.status(500).json({ message: "Error fetching posts from the database" });
-  }
-});
+// app.get("/", async (req, res) => {
+//   try {
+//     const posts = await blogPost.find(); // Fetch all blog posts from MongoDB
+//     res.json(posts); // Return the data as JSON
+//   } catch (err) {
+//     console.error("Error fetching posts:", err);
+//     res.status(500).json({ message: "Error fetching posts from the database" });
+//   }
+// });
 
 // Importing Routes
 const postRoutes = require('./routes/blogPosts');

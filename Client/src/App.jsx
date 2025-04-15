@@ -14,32 +14,34 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:4100/data");
-      setInfo(res.blogPost);
+      const res = await axios.get("http://localhost:4100/api");
+      console.log(res.data); // Check the structure of the response
+      setInfo(res.data); // or setInfo(response.data.blogPost) based on your backend shape
     } catch (error) {
       console.error("Error fetching data: ", error);
-      // Optionally, set a state to handle error and display a message to the user
     }
   };
-
+  
   useEffect(() => {
     fetchData();
   }, []);
 
   const handleAddPost = async () => {
     try {
-      const res = await axios.post("http://localhost:4100", {
+        const res = await axios.post("http://localhost:4100/api/upload", {
         title: showTitle,
         content: showContent,
       });
       // Update the state with the new post data
 
-      setInfo([...info, res.blogPost]);
+      setInfo([...info, res.data]);
 
       // Clear form fields after adding the post
       setShowTitle("");
       setShowContent("");
-      setShowForm(false); // Close the form after submission
+      setShowForm(false);  
+      
+      // Close the form after submission
     } catch (error) {
       console.log(`${error} error`);
     }
@@ -47,7 +49,7 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen w-full flex justify-center items-center gap-10 flex-col bg-grey-100 text-white">
+      <div className="min-h-screen w-full flex justify-center items-center gap-10 flex-col text-white">
         <h1 className="text-2xl text-amber-200 font-bold">
           Backend and Frontend Connection [react + (Node.js + Express)]
         </h1>
@@ -86,11 +88,12 @@ function App() {
           </div>
         )}
 
-        <ul className="rounded-2xl p-4 shadow-lg flex flex-col lg:flex-row lg:flex-wrap gap-7">
-          {info.map((item, index) => {
+        <ul className="rounded-2xl p-4 shadow-lg flex flex-col lg:flex-row lg:flex-wrap gap-7 ">
+          {info.map((item) => {
             return (
               <li
-                key={index}
+                key={item._id}
+                data-id={item._id}
                 className="bg-white text-black p-6 rounded-lg transition-transform transform hover:scale-105 hover:bg-amber-100 hover:ease-in-out duration-500 w-full lg:w-[30%]"
               >
                 <p className="text-xl text-gray-800 font-semibold">

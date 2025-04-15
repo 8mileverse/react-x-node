@@ -90,40 +90,16 @@ app.get("/", function _callee(req, res) {
 //     res.json(JSON.parse(data));
 //   });
 // });
-
-app.get("/", function _callee2(req, res) {
-  var posts;
-  return regeneratorRuntime.async(function _callee2$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          _context2.prev = 0;
-          _context2.next = 3;
-          return regeneratorRuntime.awrap(blogPost.find());
-
-        case 3:
-          posts = _context2.sent;
-          // Fetch all blog posts from MongoDB
-          res.json(posts); // Return the data as JSON
-
-          _context2.next = 11;
-          break;
-
-        case 7:
-          _context2.prev = 7;
-          _context2.t0 = _context2["catch"](0);
-          console.error("Error fetching posts:", _context2.t0);
-          res.status(500).json({
-            message: "Error fetching posts from the database"
-          });
-
-        case 11:
-        case "end":
-          return _context2.stop();
-      }
-    }
-  }, null, null, [[0, 7]]);
-}); // Importing Routes
+// app.get("/", async (req, res) => {
+//   try {
+//     const posts = await blogPost.find(); // Fetch all blog posts from MongoDB
+//     res.json(posts); // Return the data as JSON
+//   } catch (err) {
+//     console.error("Error fetching posts:", err);
+//     res.status(500).json({ message: "Error fetching posts from the database" });
+//   }
+// });
+// Importing Routes
 
 var postRoutes = require('./routes/blogPosts');
 
