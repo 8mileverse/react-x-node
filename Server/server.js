@@ -2,21 +2,21 @@ const path = require("path");
 const fs = require("fs");
 require("dotenv").config();
 
-
-
 const express = require("express");
 const app = express();
 app.use(express.json());
 const blogPost = require("./models/BlogPost");
 
 const port = process.env.PORT || 4100;
-const frontendUrl = process.env.FRONTEND_URL || process.env.VERCEL_URL ||"http://localhost:5173"; // Default to localhost if not set
+const frontendUrl = [
+  process.env.FRONTEND_URL,
+  process.env.VERCEL_URL,
+  "http://localhost:5173",
+]; // Default to localhost if not set
 // const reactAppUrl = process.env.REACT_APP_API_URL || 'http://localhost:5173'; // Default to localhost if not set
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
 
 // Midddleware to utilize CORS
 const cors = require("cors");
@@ -26,32 +26,38 @@ corsOptions = {
 };
 app.use(cors(corsOptions));
 
-
 // Middleware to use Mongoose
 const mongoose = require("mongoose");
-const connectDB = require('./config/db.js');
+const connectDB = require("./config/db.js");
 connectDB();
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then((conn) => {
-    console.log(`MongoDB connected: ${mongoose.connection.readyState === 1 ? mongoose.connection.name : 'Connection error'}`);  // Log connection host
+    console.log(
+      `MongoDB connected: ${
+        mongoose.connection.readyState === 1
+          ? mongoose.connection.name
+          : "Connection error"
+      }`
+    ); // Log connection host
   })
   .catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-    process.exit(1);  // Exit the server if DB connection fails
+    console.error("Error connecting to MongoDB:", error);
+    process.exit(1); // Exit the server if DB connection fails
   });
-  app.get("/", async (req, res) => {
-    try {
-      const posts = await blogPost.find(); // Fetch all blog posts
-      console.log("Posts fetched:", posts); // Log to see what is fetched
-      res.json(posts); // Return the posts
-    } catch (err) {
-      console.error("Error fetching posts:", err);
-      res.status(500).json({ message: "Error fetching posts from the database" });
-    }
-  });
-  
-
-
+app.get("/", async (req, res) => {
+  try {
+    const posts = await blogPost.find(); // Fetch all blog posts
+    console.log("Posts fetched:", posts); // Log to see what is fetched
+    res.json(posts); // Return the posts
+  } catch (err) {
+    console.error("Error fetching posts:", err);
+    res.status(500).json({ message: "Error fetching posts from the database" });
+  }
+});
 
 // For the Json File
 // app.get("/", (req, res, next) => {
@@ -64,7 +70,6 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 //   });
 // });
 
-
 // app.get("/", async (req, res) => {
 //   try {
 //     const posts = await blogPost.find(); // Fetch all blog posts from MongoDB
@@ -76,8 +81,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 // });
 
 // Importing Routes
-const postRoutes = require('./routes/blogPosts');
-app.use('/api', postRoutes);
+const postRoutes = require("./routes/blogPosts");
+app.use("/api", postRoutes);
 
 // Middleware
 app.listen(port, () => {

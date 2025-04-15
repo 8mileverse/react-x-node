@@ -14,7 +14,7 @@ app.use(express.json());
 var blogPost = require("./models/BlogPost");
 
 var port = process.env.PORT || 4100;
-var frontendUrl = process.env.FRONTEND_URL || process.env.VERCEL_URL || "http://localhost:5173"; // Default to localhost if not set
+var frontendUrl = [process.env.FRONTEND_URL, process.env.VERCEL_URL, "http://localhost:5173"]; // Default to localhost if not set
 // const reactAppUrl = process.env.REACT_APP_API_URL || 'http://localhost:5173'; // Default to localhost if not set
 
 var bodyParser = require("body-parser");
@@ -34,16 +34,16 @@ app.use(cors(corsOptions)); // Middleware to use Mongoose
 
 var mongoose = require("mongoose");
 
-var connectDB = require('./config/db.js');
+var connectDB = require("./config/db.js");
 
 connectDB();
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(function (conn) {
-  console.log("MongoDB connected: ".concat(mongoose.connection.readyState === 1 ? mongoose.connection.name : 'Connection error')); // Log connection host
+  console.log("MongoDB connected: ".concat(mongoose.connection.readyState === 1 ? mongoose.connection.name : "Connection error")); // Log connection host
 })["catch"](function (error) {
-  console.error('Error connecting to MongoDB:', error);
+  console.error("Error connecting to MongoDB:", error);
   process.exit(1); // Exit the server if DB connection fails
 });
 app.get("/", function _callee(req, res) {
@@ -101,9 +101,9 @@ app.get("/", function _callee(req, res) {
 // });
 // Importing Routes
 
-var postRoutes = require('./routes/blogPosts');
+var postRoutes = require("./routes/blogPosts");
 
-app.use('/api', postRoutes); // Middleware
+app.use("/api", postRoutes); // Middleware
 
 app.listen(port, function () {
   console.log("Server is running on port ".concat(port));
