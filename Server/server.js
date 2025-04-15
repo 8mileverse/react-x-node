@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Midddleware to utilize CORS
 const cors = require("cors");
 corsOptions = {
-  origin: "http://localhost:5173", // Replace with your frontend URL
+  origin: frontendUrl, // Replace with your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE"],
 };
 app.use(cors(corsOptions));

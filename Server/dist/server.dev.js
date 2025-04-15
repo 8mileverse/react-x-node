@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({
 var cors = require("cors");
 
 corsOptions = {
-  origin: "http://localhost:5173",
+  origin: frontendUrl,
   // Replace with your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE"]
 };
