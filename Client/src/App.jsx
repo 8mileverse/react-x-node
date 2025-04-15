@@ -3,6 +3,12 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+
+
+// Use the API URL from .env or default to localhost for local dev
+const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:4100/api"; // Use prod URL or fallback to localhost
+
+
 //           "Self-discipline is a muscle. Train it daily to achieve your goals and dreams.",
 
 function App() {
@@ -11,10 +17,11 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [showTitle, setShowTitle] = useState("");
   const [showContent, setShowContent] = useState("");
+  
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:4100/api");
+      const res = await axios.get(`${baseUrl}`);
       console.log(res.data); // Check the structure of the response
       setInfo(res.data); // or setInfo(response.data.blogPost) based on your backend shape
     } catch (error) {
@@ -28,7 +35,7 @@ function App() {
 
   const handleAddPost = async () => {
     try {
-        const res = await axios.post("http://localhost:4100/api/upload", {
+        const res = await axios.post(`${baseUrl}/upload`, {
         title: showTitle,
         content: showContent,
       });
