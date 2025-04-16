@@ -39,8 +39,8 @@ exports.getPostById = async (req, res) => {
 
 exports.createNewPost = async (req, res) => {
   try {
-    const { title, content } = req.body;
-    const newPost = new blogPost({ title, content });
+    const { title, content, author } = req.body;
+    const newPost = new blogPost({ title, content, author });
     await newPost.save();
 
     res.status(201).json({

@@ -68,3 +68,8 @@ button:hover{
   border: 0.5px solid amber;
   transition: 0.5s ease-in-out;
 }
+
+
+input.w-full.p-3.border.border-gray-300.rounded-lg.text-white.placeholder-gray-400.focus\:outline-none.focus\:ring-2.focus\:ring-amber-400{
+  margin-top:20px;
+}

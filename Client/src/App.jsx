@@ -17,6 +17,7 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [showTitle, setShowTitle] = useState("");
   const [showContent, setShowContent] = useState("");
+  const [showAuthor, setShowAuthor] = useState("");
   
 
   const fetchData = async () => {
@@ -38,7 +39,10 @@ function App() {
         const res = await axios.post(`${baseUrl}/api/upload`, {
         title: showTitle,
         content: showContent,
+        author: showAuthor,         // Check the structure of the response
       });
+
+      console.log(res.data); 
       // Update the state with the new post data
 
       setInfo([...info, res.data]);
@@ -46,6 +50,7 @@ function App() {
       // Clear form fields after adding the post
       setShowTitle("");
       setShowContent("");
+      setShowAuthor("");
       setShowForm(false);  
       
       // Close the form after submission
@@ -86,6 +91,15 @@ function App() {
               rows="5"
             />
 
+<input
+              type="text"
+              placeholder="Enter Author Name"
+              value={showAuthor}
+              onChange={(e) => setShowAuthor(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg text-white  placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400"
+            />
+
+
             <button
               onClick={handleAddPost}
               className="w-full px-4 bg-amber-500 hover:bg-amber-600 hover:border handlePostBtn hover:border-amber-400 focus:outline-none transition-colors duration-300 text-white font-semibold rounded-lg"
@@ -108,6 +122,9 @@ function App() {
                 </p>
                 <p className="text-sm text-gray-600 font-light">
                   {item.content}
+                </p>
+                <p className="text-xl text-gray-600 font-semibold mt-5 author ">
+                  {item.author}
                 </p>
               </li>
             );

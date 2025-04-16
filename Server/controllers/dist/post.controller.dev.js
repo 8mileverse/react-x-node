@@ -87,17 +87,18 @@ exports.getPostById = function _callee2(req, res) {
 
 
 exports.createNewPost = function _callee3(req, res) {
-  var _req$body, title, content, newPost;
+  var _req$body, title, content, author, newPost;
 
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
-          _req$body = req.body, title = _req$body.title, content = _req$body.content;
+          _req$body = req.body, title = _req$body.title, content = _req$body.content, author = _req$body.author;
           newPost = new blogPost({
             title: title,
-            content: content
+            content: content,
+            author: author
           });
           _context3.next = 5;
           return regeneratorRuntime.awrap(newPost.save());
